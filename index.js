@@ -77,7 +77,7 @@ function Slideout(options) {
   this._tolerance = parseInt(options.tolerance, 10) || 70;
 
   this._minWidth = parseInt(options.min, 10) || 0;
-  this._padding = this._translateTo = this._minWidth + (parseInt(options.padding, 10) || 256);
+  this._padding = this._translateTo = parseInt(options.padding, 10) || 256;
   this._orientation = options.side === 'right' ? -1 : 1;
   this._translateTo *= this._orientation;
 
