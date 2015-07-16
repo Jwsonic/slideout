@@ -117,6 +117,7 @@ Slideout.prototype.close = function() {
   if (!this.isOpen() && !this._opening) { return this; }
   this.emit('beforeclose');
   this._setTransition();
+  console.log(this._minWidth);
   this._translateXTo(this._minWidth);
   this._opened = false;
   setTimeout(function() {
