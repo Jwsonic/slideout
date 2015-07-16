@@ -55,6 +55,7 @@ function Slideout(options) {
   // Sets default values
   this._startOffsetX = 0;
   this._currentOffsetX = 0;
+  this._minWidth = 0;
   this._opening = false;
   this._moved = false;
   this._opened = false;
@@ -74,7 +75,9 @@ function Slideout(options) {
   this._fx = options.fx || 'ease';
   this._duration = parseInt(options.duration, 10) || 300;
   this._tolerance = parseInt(options.tolerance, 10) || 70;
-  this._padding = this._translateTo = parseInt(options.padding, 10) || 256;
+
+  this._startOffsetX = this._currentOffsetX = this._minWidth = parseInt(options.minWidth, 10) || 0;
+  this._padding = this._translateTo = this._minWidth + (parseInt(options.padding, 10) || 256);
   this._orientation = options.side === 'right' ? -1 : 1;
   this._translateTo *= this._orientation;
 
@@ -114,7 +117,7 @@ Slideout.prototype.close = function() {
   if (!this.isOpen() && !this._opening) { return this; }
   this.emit('beforeclose');
   this._setTransition();
-  this._translateXTo(0);
+  this._translateXTo(this._minWidth);
   this._opened = false;
   setTimeout(function() {
     html.className = html.className.replace(/ slideout-open/, '');
